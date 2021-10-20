@@ -25,7 +25,7 @@ if (!isset($_POST['add'])) {
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-body">
+                        <div class="box-body" style="max-width: 1300px;">
                             <?php
                             if (isset($_POST['add'])) : ?>
                                 <?php for ($x = 1; $x <= 9; $x++) : ?>
@@ -54,9 +54,9 @@ if (!isset($_POST['add'])) {
                                     if (!empty($invoice_no)) : ?>
                                         <?php
                                         $sql = "INSERT INTO token (invoice_no, order_date, customer_name, length, body, sleeve, cutting, embroidery, swing, token_no, product_code, note, created_on) VALUES ('$invoice_no', '$order_date', '$customer_name', '$length', '$body', '$sleeve', '$cutting', '$embroidery', '$swing', '$token_no','$product_code','$note', NOW())";
-                                        $conn->query($sql)
+                                        $conn->query($sql);
                                         ?>
-                                        <div style="width: 33.33%; font-size: 12px; float: left; padding: 5px;">
+                                        <div style="width: 33.33%; font-size: 12px; float: left; padding: 15px 5px;">
                                             <table class="table table-bordered" style="margin: 0;">
                                                 <tr>
                                                     <td class="table-borderless" colspan="3">Name: <?= $customer_name ?></td>

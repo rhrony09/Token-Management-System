@@ -76,7 +76,7 @@
                                                 <td><?php echo $row['added_on']; ?></td>
                                                 <?php if ($user['role'] == 1) : ?>
                                                     <td>
-                                                        <a href='<?php echo "embroidery_master_delete.php?delete=role&id=" . $row['id']; ?>' class=" btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Delete</a>
+                                                        <a href='<?php echo "swing_master_delete.php?delete=role&id=" . $row['id']; ?>' class=" btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Delete</a>
                                                     </td>
                                                 <? endif ?>
                                             </tr>
