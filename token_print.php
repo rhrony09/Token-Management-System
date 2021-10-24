@@ -49,11 +49,14 @@ if (!isset($_POST['add'])) {
                                     $numbers = str_pad(++$assoc['total'], 3, "0", STR_PAD_LEFT);
                                     $letters = 'Abohon-';
                                     $token_no = $letters . $numbers;
+
+                                    //Get Who Created Token
+                                    $created_by = $user['firstname'] . ' ' . $user['lastname'];
                                     ?>
                                     <?php
                                     if (!empty($invoice_no)) : ?>
                                         <?php
-                                        $sql = "INSERT INTO token (invoice_no, order_date, customer_name, length, body, sleeve, cutting, embroidery, swing, token_no, product_code, note, created_on) VALUES ('$invoice_no', '$order_date', '$customer_name', '$length', '$body', '$sleeve', '$cutting', '$embroidery', '$swing', '$token_no','$product_code','$note', NOW())";
+                                        $sql = "INSERT INTO token (invoice_no, order_date, customer_name, length, body, sleeve, cutting, embroidery, swing, token_no, product_code, note, created_by, created_on) VALUES ('$invoice_no', '$order_date', '$customer_name', '$length', '$body', '$sleeve', '$cutting', '$embroidery', '$swing', '$token_no','$product_code','$note', '$created_by', NOW())";
                                         $conn->query($sql);
                                         ?>
                                         <div style="width: 33.33%; font-size: 12px; float: left; padding: 15px 5px;">

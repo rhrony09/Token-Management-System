@@ -59,6 +59,7 @@ $query = $conn->query($sql);
                                     <thead>
                                         <tr>
                                             <th>Created On</th>
+                                            <th>Created By</th>
                                             <th>Invoice No</th>
                                             <th>Order Date</th>
                                             <th>Product Code</th>
@@ -71,6 +72,9 @@ $query = $conn->query($sql);
                                             <th>Swing</th>
                                             <th>Token No</th>
                                             <th>Note</th>
+                                            <?php if ($user['role'] == 1) : ?>
+                                                <th>Action</th>
+                                            <? endif ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,6 +86,7 @@ $query = $conn->query($sql);
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['created_on']; ?></td>
+                                                <td><?php echo $row['created_by']; ?></td>
                                                 <td><?php echo $row['invoice_no']; ?></td>
                                                 <td><?php echo $row['order_date']; ?></td>
                                                 <td><?php echo $row['product_code']; ?></td>
@@ -94,6 +99,11 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['swing']; ?></td>
                                                 <td><?php echo $row['token_no']; ?></td>
                                                 <td><?php echo $row['note']; ?></td>
+                                                <?php if ($user['role'] == 1) : ?>
+                                                    <td>
+                                                        <a href='<?php echo "token_delete.php?delete=role&id=" . $row['id']; ?>' class=" btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Delete</a>
+                                                    </td>
+                                                <? endif ?>
                                             </tr>
                                         <?php
                                         }
