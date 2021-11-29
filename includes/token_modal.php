@@ -12,12 +12,12 @@
                     <div class="form-group">
                         <div class="col-md-3">
                             <label for="invoice_no" class="control-label">Invoice Number</label>
-                            <input type="text" class="form-control" id="invoice_no" name="invoice_no">
+                            <input type="text" class="form-control" id="invoice_no" name="invoice_no" required>
                         </div>
                         <div class="col-md-3">
                             <label for="datepicker_add" class="control-label">Order Date</label>
                             <div class='input-group date'>
-                                <input type="text" autocomplete="off" class="form-control" id="datepicker_add" name="order_date">
+                                <input type="text" autocomplete="off" class="form-control" id="datepicker_add" name="order_date" required>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-2">
                             <label for="product_code" class="control-label">Product Code</label>
-                            <input type="text" class="form-control" id="product_code" name="product_code">
+                            <input type="text" class="form-control" id="product_code" name="product_code" required>
                         </div>
                         <div class="col-md-4">
                             <label for="color" class="control-label">Color</label>
