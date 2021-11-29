@@ -56,8 +56,7 @@
                                 <?php
                                 $sql = "SELECT * FROM cutting_master";
                                 $query = $conn->query($sql);
-                                while ($prow = $query->fetch_assoc())
-                                {
+                                while ($prow = $query->fetch_assoc()) {
                                     echo "
                                                         <option value='" . $prow['name'] . "'>" . $prow['name'] . "</option>
                                                          ";
@@ -72,8 +71,7 @@
                                 <?php
                                 $sql = "SELECT * FROM embroidery_master";
                                 $query = $conn->query($sql);
-                                while ($prow = $query->fetch_assoc())
-                                {
+                                while ($prow = $query->fetch_assoc()) {
                                     echo "
                                                         <option value='" . $prow['name'] . "'>" . $prow['name'] . "</option>
                                                          ";
@@ -88,8 +86,7 @@
                                 <?php
                                 $sql = "SELECT * FROM swing_master";
                                 $query = $conn->query($sql);
-                                while ($prow = $query->fetch_assoc())
-                                {
+                                while ($prow = $query->fetch_assoc()) {
                                     echo "
                                                         <option value='" . $prow['name'] . "'>" . $prow['name'] . "</option>
                                                          ";
