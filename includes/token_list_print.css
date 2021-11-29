@@ -1,0 +1,55 @@
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    -moz-print-color-adjust: exact !important;
+    -ms-print-color-adjust: exact !important;
+  }
+  /* html,
+  body {
+    width: 297mm;
+    height: 210mm;
+  } */
+  .box {
+    border: 0 !important;
+  }
+  footer,
+  .not-print {
+    display: none !important;
+  }
+  .box-body {
+    padding: 0 !important;
+  }
+  .token-list {
+    font-size: 14px !important;
+  }
+}
+
+@page {
+  size: Legal landscape;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.token-list {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #c6c6c6;
+}
+
+.token-list td,
+.token-list th {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #f2f2f2;
+}
+
+.token-list tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}

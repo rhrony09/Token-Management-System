@@ -152,21 +152,6 @@ if (isset($_GET['year'])) {
               <div class="box-header with-border">
                 <h3 class="box-title">Monthly Token Create Report</h3>
                 <div class="box-tools pull-right">
-                  <!-- <form class="form-inline">
-                    <div class="form-group">
-                      <label>Select Year: </label>
-                      <select class="form-control input-sm" id="select_year">
-                        <?php
-                        // for ($i = 2021; $i <= 2025; $i++) {
-                        //   $selected = ($i == $year) ? 'selected' : '';
-                        //   echo "
-                        //     <option value='" . $i . "' " . $selected . ">" . $i . "</option>
-                        //   ";
-                        // }
-                        ?>
-                      </select>
-                    </div>
-                  </form> -->
                 </div>
               </div>
               <div class="box-body">

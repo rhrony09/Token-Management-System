@@ -1,7 +1,7 @@
 <?php
 include 'includes/session.php';
 include 'includes/header.php';
-$sql = "SELECT * FROM token ORDER BY id desc";
+$sql = "SELECT * FROM token WHERE print_status = 1 ORDER BY id DESC";
 $query = $conn->query($sql);
 ?>
 
@@ -17,10 +17,10 @@ $query = $conn->query($sql);
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>All Tokens (<?= $query->num_rows ?>)</h1>
+                <h1>Printed Tokens (<?= $query->num_rows ?>)</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">All Tokens</li>
+                    <li class="active">Printed Tokens</li>
                 </ol>
             </section>
 

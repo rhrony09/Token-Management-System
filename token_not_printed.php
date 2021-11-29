@@ -1,7 +1,7 @@
 <?php
 include 'includes/session.php';
 include 'includes/header.php';
-$sql = "SELECT * FROM token ORDER BY id desc";
+$sql = "SELECT * FROM token WHERE print_status = 0 ORDER BY id DESC";
 $query = $conn->query($sql);
 ?>
 
@@ -17,10 +17,10 @@ $query = $conn->query($sql);
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>All Tokens (<?= $query->num_rows ?>)</h1>
+                <h1>Not Printed Tokens (<?= $query->num_rows ?>)</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">All Tokens</li>
+                    <li class="active">Not Printed Tokens</li>
                 </ol>
             </section>
 
@@ -80,14 +80,6 @@ $query = $conn->query($sql);
                                     </thead>
                                     <tbody>
                                         <?php
-                                        function disableDeleteButton()
-                                        {
-                                            global $row;
-                                            if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered')
-                                            {
-                                                return 'disabled';
-                                            }
-                                        }
                                         while ($row = $query->fetch_assoc())
                                         {
                                         ?>
@@ -107,7 +99,7 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['status']; ?></td>
                                                 <td class="not-print">
                                                     <a href='<?php echo "token_view.php?view=token&id=" . $row['id']; ?>' class="btn btn-primary btn-sm btn-flat"><i class="fa fa-eye"></i> View</a>
-                                                    <?php if ($user['role'] == 1 && disableDeleteButton() != 'disabled') : ?>
+                                                    <?php if ($user['role'] == 1) : ?>
                                                         <a href='<?php echo "token_delete.php?delete=token&id=" . $row['id']; ?>' class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Delete</a>
                                                     <? endif ?>
                                                 </td>
@@ -118,6 +110,9 @@ $query = $conn->query($sql);
                                         ?>
                                     </tbody>
                                 </table>
+                                <div class="col-xs-12 text-center" style="padding: 30px 0 20px 0">
+                                    <a href="token_print.php?print=all" class="btn btn-primary btn-md not-print"><i class="fa fa-print"></i> Print All</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -127,13 +122,13 @@ $query = $conn->query($sql);
             <!-- right col -->
         </div>
         <?php include 'includes/footer.php'; ?>
+        <?php include 'includes/token_modal.php'; ?>
 
     </div>
     <!-- ./wrapper -->
 
 
     <?php include 'includes/scripts.php'; ?>
-    <?php include 'includes/token_modal.php'; ?>
 
 </body>
 

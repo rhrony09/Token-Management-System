@@ -1,0 +1,64 @@
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    -moz-print-color-adjust: exact !important;
+    -ms-print-color-adjust: exact !important;
+  }
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
+  .box {
+    border: 0 !important;
+  }
+  footer {
+    display: none !important;
+  }
+  .box-body {
+    padding: 0 !important;
+  }
+  .pdf {
+    font-size: 15px !important;
+  }
+
+  .page-break {
+    page-break-after: always !important;
+  }
+}
+
+@page {
+  size: A4 portrait;
+  margin-left: 3px;
+  margin-right: 0px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.pdf {
+  font-size: 16px;
+}
+
+.bordered {
+  border: 1px solid rgb(228, 228, 228) !important;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-2,
+.col-xs-3,
+.pdf .col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.bordered .col-xs-12 {
+  padding: 0;
+}
+
+.box-body > .col-xs-6 {
+  padding: 5px !important;
+}

@@ -21,7 +21,8 @@
             <!-- Main content -->
             <section class="content">
                 <?php
-                if (isset($_SESSION['error'])) {
+                if (isset($_SESSION['error']))
+                {
                     echo "
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -31,7 +32,8 @@
           ";
                     unset($_SESSION['error']);
                 }
-                if (isset($_SESSION['success'])) {
+                if (isset($_SESSION['success']))
+                {
                     echo "
             <div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -67,8 +69,8 @@
                                                     <input type="text" class="form-control" id="product_code<?= $i ?>" name="product_code<?= $i ?>">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="customer_name<?= $i ?>" class="control-label">Customer Name</label>
-                                                    <input type="text" class="form-control" id="customer_name<?= $i ?>" name="customer_name<?= $i ?>">
+                                                    <label for="color<?= $i ?>" class="control-label">Color</label>
+                                                    <input type="text" class="form-control" id="color<?= $i ?>" name="color<?= $i ?>">
                                                 </div>
                                             </div>
                                             <h4 style="margin-top: 30px; font-weight: 600; text-decoration: underline;">Measurement</h4>
@@ -95,7 +97,8 @@
                                                         <?php
                                                         $sql = "SELECT * FROM cutting_master";
                                                         $query = $conn->query($sql);
-                                                        while ($prow = $query->fetch_assoc()) {
+                                                        while ($prow = $query->fetch_assoc())
+                                                        {
                                                             echo "
                                                         <option value='" . $prow['name'] . "'>" . $prow['name'] . "</option>
                                                          ";
@@ -110,7 +113,8 @@
                                                         <?php
                                                         $sql = "SELECT * FROM embroidery_master";
                                                         $query = $conn->query($sql);
-                                                        while ($prow = $query->fetch_assoc()) {
+                                                        while ($prow = $query->fetch_assoc())
+                                                        {
                                                             echo "
                                                         <option value='" . $prow['name'] . "'>" . $prow['name'] . "</option>
                                                          ";
@@ -125,7 +129,8 @@
                                                         <?php
                                                         $sql = "SELECT * FROM swing_master";
                                                         $query = $conn->query($sql);
-                                                        while ($prow = $query->fetch_assoc()) {
+                                                        while ($prow = $query->fetch_assoc())
+                                                        {
                                                             echo "
                                                         <option value='" . $prow['name'] . "'>" . $prow['name'] . "</option>
                                                          ";

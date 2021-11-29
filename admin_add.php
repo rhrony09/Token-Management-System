@@ -9,7 +9,7 @@ if (isset($_POST['add'])) {
     $password = $_POST['password'];
     $filename = $_FILES['photo']['name'];
     if (!empty($filename)) {
-        move_uploaded_file($_FILES['photo']['tmp_name'], '../images/' . $filename);
+        move_uploaded_file($_FILES['photo']['tmp_name'], './library/images/' . $filename);
     }
 
     //password hass

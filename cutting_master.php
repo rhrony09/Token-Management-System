@@ -21,7 +21,8 @@
             <!-- Main content -->
             <section class="content">
                 <?php
-                if (isset($_SESSION['error'])) {
+                if (isset($_SESSION['error']))
+                {
                     echo "
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -31,7 +32,8 @@
           ";
                     unset($_SESSION['error']);
                 }
-                if (isset($_SESSION['success'])) {
+                if (isset($_SESSION['success']))
+                {
                     echo "
             <div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -51,39 +53,36 @@
                                 <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
                             </div>
                             <div class="box-body">
-                                <table id="example1" class="table table-bordered" width="100%">
-                                    <thead>
+                                <table class="table table-bordered" width="100%">
+                                    <tr>
+                                        <th style="width: 10%; text-align: center;">S/N</th>
+                                        <th>Name</th>
+                                        <th>Added On</th>
+                                        <?php if ($user['role'] == 1) : ?>
+                                            <th>Action</th>
+                                        <? endif ?>
+                                    </tr>
+                                    <?php
+                                    $sql = "SELECT * FROM cutting_master";
+                                    $query = $conn->query($sql);
+                                    $i = 1;
+                                    while ($row = $query->fetch_assoc())
+                                    {
+                                    ?>
                                         <tr>
-                                            <th style="width: 10%; text-align: center;">S/N</th>
-                                            <th>Name</th>
-                                            <th>Added On</th>
+                                            <td style="width: 10%; text-align: center;"><?php echo $i;
+                                                                                        $i++; ?></td>
+                                            <td style="width: 50%;"><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['added_on']; ?></td>
                                             <?php if ($user['role'] == 1) : ?>
-                                                <th>Action</th>
+                                                <td>
+                                                    <a href='<?php echo "cutting_master_delete.php?delete=role&id=" . $row['id']; ?>' class=" btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Delete</a>
+                                                </td>
                                             <? endif ?>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $sql = "SELECT * FROM cutting_master";
-                                        $query = $conn->query($sql);
-                                        $i = 1;
-                                        while ($row = $query->fetch_assoc()) {
-                                        ?>
-                                            <tr>
-                                                <td style="width: 10%; text-align: center;"><?php echo $i;
-                                                                                            $i++; ?></td>
-                                                <td style="width: 50%;"><?php echo $row['name']; ?></td>
-                                                <td><?php echo $row['added_on']; ?></td>
-                                                <?php if ($user['role'] == 1) : ?>
-                                                    <td>
-                                                        <a href='<?php echo "cutting_master_delete.php?delete=role&id=" . $row['id']; ?>' class=" btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Delete</a>
-                                                    </td>
-                                                <? endif ?>
-                                            </tr>
-                                        <?php
-                                        }
-                                        ?>
-                                    </tbody>
+                                    <?php
+                                    }
+                                    ?>
                                 </table>
                             </div>
                         </div>

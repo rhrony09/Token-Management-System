@@ -17,8 +17,20 @@
       <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
       <li class="header">MANAGE</li>
 
-      <li><a href="tokens.php"><i class="fa fa-tasks"></i> <span>All Token</span></a></li>
-      <li><a href="token_add_new.php"><i class="fa fa-plus-circle"></i> <span>Add New Token</span></a></li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-ticket"></i>
+          <span>Tokens</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="tokens.php"><i class="fa fa-circle-o"></i> All Token</a></li>
+          <li><a href="token_printed.php"><i class="fa fa-circle-o"></i> Printed Token</a></li>
+          <li><a href="token_not_printed.php"><i class="fa fa-circle-o"></i> Not Printed Token</a></li>
+        </ul>
+      </li>
 
       <li class="treeview">
         <a href="#">

@@ -93,8 +93,51 @@
       width: 80%;
     }
 
-    .table-borderless {
-      border: 0 !important;
+    .token-view {
+      padding: 30px;
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .delivered {
+      background-color: #00a65a;
+      color: #fff;
+      padding: 0 5px;
+    }
+
+    .shipped {
+      background-color: #f39c12;
+      color: #fff;
+      padding: 0 5px;
+    }
+
+    .returned {
+      background-color: #dd4b39;
+      color: #fff;
+      padding: 0 5px;
+    }
+
+    .default_status {
+      background-color: #00c0ef;
+      color: #fff;
+      padding: 0 5px;
+    }
+
+    a.disabled {
+      pointer-events: none;
+    }
+
+    .modal-dialog-token {
+      width: 1000px;
+      -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0);
+      -webkit-transition: -webkit-transform .3s ease-out;
+      -o-transition: -o-transform .3s ease-out;
+      transition: transform .3s ease-out;
+      margin: 30px auto;
+      position: relative;
     }
   </style>
 </head>
