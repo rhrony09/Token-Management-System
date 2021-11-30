@@ -7,7 +7,7 @@ if (isset($_GET['update'])) {
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
-    if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered' || $query->num_rows <= 0) {
+    if ($row['status'] == 'Returned' || $row['status'] == 'Delivered' || $query->num_rows <= 0) {
         $_SESSION['error'] = "You don't have permission to edit.";
         header('location: tokens.php');
     }
