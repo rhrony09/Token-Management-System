@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <div class="col-md-3">
                             <label for="invoice_no" class="control-label">Invoice Number</label>
-                            <input type="text" class="form-control" id="invoice_no" name="invoice_no" required>
+                            <input type="text" class="form-control" id="invoice_no" name="invoice_no">
                         </div>
                         <div class="col-md-3">
                             <label for="datepicker_add" class="control-label">Order Date</label>

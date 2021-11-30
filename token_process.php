@@ -22,7 +22,7 @@ if (isset($_POST['add'])) {
 
     $sql = "INSERT INTO token (invoice_no, order_date, length, body, sleeve, cutting, embroidery, swing, token_no, product_code, note, color, created_on) VALUES ('$invoice_no', '$order_date', '$length', '$body', '$sleeve', '$cutting', '$embroidery', '$swing', '$token_no','$product_code','$note', '$color', NOW())";
 
-    if ($invoice_no != null && $order_date != null && $product_code != null) {
+    if ($order_date != null && $product_code != null) {
         if ($conn->query($sql)) {
             $_SESSION['success'] = 'Token added successfully';
             header('location: token_not_printed.php');
