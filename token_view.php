@@ -36,6 +36,13 @@ function disableDeleteButton()
 function disableUpdateButton()
 {
     global $row;
+    if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
+        return 'disabled';
+    }
+}
+function disableShippedButton()
+{
+    global $row;
     if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered' || $row['print_status'] == 0) {
         return 'disabled';
     }
@@ -162,7 +169,7 @@ function statusColor()
                                     <h3>Actions</h3>
                                     <hr>
                                     <a href='<?php echo "token_update.php?update=token&id=" . $id; ?>' class="btn btn-info <?= disableUpdateButton() ?>">Update</a>
-                                    <a href='<?php echo "token_shipped.php?update=token&id=" . $id; ?>' class="btn btn-warning <?= disableUpdateButton() ?>">Shipped</a>
+                                    <a href='<?php echo "token_shipped.php?update=token&id=" . $id; ?>' class="btn btn-warning <?= disableShippedButton() ?>">Shipped</a>
                                     <a href='<?php echo "token_delivered.php?update=token&id=" . $id; ?>' class="btn btn-success <?= disableDeliveredButton() ?>">Delivered</a>
                                     <a href='<?php echo "token_returned.php?update=token&id=" . $id; ?>' class="btn btn-primary <?= disableReturnedButton() ?>">Returned</a>
                                     <?php if ($user['role'] == 1 && disableDeleteButton() != "disabled") : ?>
