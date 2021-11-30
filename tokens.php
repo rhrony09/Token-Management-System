@@ -27,8 +27,7 @@ $query = $conn->query($sql);
             <!-- Main content -->
             <section class="content">
                 <?php
-                if (isset($_SESSION['error']))
-                {
+                if (isset($_SESSION['error'])) {
                     echo "
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -38,8 +37,7 @@ $query = $conn->query($sql);
           ";
                     unset($_SESSION['error']);
                 }
-                if (isset($_SESSION['success']))
-                {
+                if (isset($_SESSION['success'])) {
                     echo "
             <div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -83,13 +81,29 @@ $query = $conn->query($sql);
                                         function disableDeleteButton()
                                         {
                                             global $row;
-                                            if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered')
-                                            {
+                                            if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
                                                 return 'disabled';
                                             }
                                         }
-                                        while ($row = $query->fetch_assoc())
+
+                                        function echoStatus()
                                         {
+                                            global $row;
+                                            if ($row['status'] == 'Returned') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['return_date'] . "</span>";
+                                                return $status;
+                                            } elseif ($row['status'] == 'Delivered') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['delivery_date'] . "</span>";
+                                                return $status;
+                                            } elseif ($row['status'] == 'Stocked') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['stock_date'] . "</span>";
+                                                return $status;
+                                            } else {
+                                                $status = $row['status'];
+                                                return $status;
+                                            }
+                                        }
+                                        while ($row = $query->fetch_assoc()) {
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['token_no']; ?></td>
@@ -104,7 +118,7 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['embroidery']; ?></td>
                                                 <td><?php echo $row['swing']; ?></td>
                                                 <td><?php echo $row['note']; ?></td>
-                                                <td><?php echo $row['status']; ?></td>
+                                                <td><?php echo echoStatus(); ?></td>
                                                 <td class="not-print">
                                                     <a href='<?php echo "token_view.php?view=token&id=" . $row['id']; ?>' class="btn btn-primary btn-sm btn-flat"><i class="fa fa-eye"></i> View</a>
                                                     <?php if ($user['role'] == 1 && disableDeleteButton() != 'disabled') : ?>

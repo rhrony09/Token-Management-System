@@ -29,21 +29,22 @@ function echo_status()
 function disableDeleteButton()
 {
     global $row;
-    if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
+    if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
         return 'disabled';
     }
 }
 function disableUpdateButton()
 {
     global $row;
-    if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
+    if ($row['status'] == 'Returned' || $row['status'] == 'Delivered') {
         return 'disabled';
     }
 }
-function disableShippedButton()
+
+function disableStockedButton()
 {
     global $row;
-    if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered' || $row['print_status'] == 0) {
+    if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered' || $row['print_status'] == 0) {
         return 'disabled';
     }
 }
@@ -67,12 +68,12 @@ function disableReturnedButton()
 function statusColor()
 {
     global $row;
-    if ($row['status'] == 'Shipped') {
-        return "shipped";
-    } elseif ($row['status'] == 'Delivered') {
+    if ($row['status'] == 'Delivered') {
         return "delivered";
     } elseif ($row['status'] == 'Returned') {
         return "returned";
+    } elseif ($row['status'] == 'Stocked') {
+        return "stocked";
     } else {
         return "default_status";
     }
@@ -165,11 +166,20 @@ function statusColor()
                                 <div class="col-xs-12">
                                     Status: <span class="<?= statusColor() ?>"><?= echo_status() ?></span>
                                 </div>
+                                <div class="col-xs-4">
+                                    Stock Date: <?= $row['stock_date'] ?>
+                                </div>
+                                <div class="col-xs-3">
+                                    Delivery Date: <?= $row['delivery_date'] ?>
+                                </div>
+                                <div class="col-xs-5">
+                                    Return Date: <?= $row['return_date'] ?>
+                                </div>
                                 <div style="padding-top: 30px;" class="col-xs-12">
                                     <h3>Actions</h3>
                                     <hr>
                                     <a href='<?php echo "token_update.php?update=token&id=" . $id; ?>' class="btn btn-info <?= disableUpdateButton() ?>">Update</a>
-                                    <a href='<?php echo "token_shipped.php?update=token&id=" . $id; ?>' class="btn btn-warning <?= disableShippedButton() ?>">Shipped</a>
+                                    <a href='<?php echo "token_stocked.php?update=token&id=" . $id; ?>' class="btn btn-warning <?= disableStockedButton() ?>">Stocked</a>
                                     <a href='<?php echo "token_delivered.php?update=token&id=" . $id; ?>' class="btn btn-success <?= disableDeliveredButton() ?>">Delivered</a>
                                     <a href='<?php echo "token_returned.php?update=token&id=" . $id; ?>' class="btn btn-primary <?= disableReturnedButton() ?>">Returned</a>
                                     <?php if ($user['role'] == 1 && disableDeleteButton() != "disabled") : ?>

@@ -1,21 +1,15 @@
 <?php
 include 'includes/session.php';
 
-if (isset($_GET['update']))
-{
+if (isset($_GET['update'])) {
     $id = $_GET['id'];
-    $sql = "UPDATE token SET status = 'Shipped' WHERE id = '$id'";
-    if ($conn->query($sql))
-    {
+    $sql = "UPDATE token SET status = 'Stocked', stock_date = NOW() WHERE id = '$id'";
+    if ($conn->query($sql)) {
         $_SESSION['success'] = 'Status update successfully';
-    }
-    else
-    {
+    } else {
         $_SESSION['error'] = $conn->error;
     }
-}
-else
-{
+} else {
     $_SESSION['error'] = 'Select Token first';
 }
 $url = 'token_view.php?view=token&id=' . $id;

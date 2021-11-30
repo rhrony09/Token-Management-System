@@ -1,21 +1,17 @@
 <?php
 include 'includes/session.php';
 
-if (isset($_GET['update']))
-{
+if (isset($_GET['update'])) {
     $id = $_GET['id'];
     $sql = "SELECT * FROM token WHERE id = '$id'";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
-    if ($row['status'] == 'Shipped' || $row['status'] == 'Returned' || $row['status'] == 'Delivered' || $query->num_rows <= 0)
-    {
+    if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered' || $query->num_rows <= 0) {
         $_SESSION['error'] = "You don't have permission to edit.";
         header('location: tokens.php');
     }
-}
-else
-{
+} else {
     $_SESSION['error'] = 'Select Token first';
     header('location: tokens.php');
 }
@@ -23,20 +19,13 @@ else
 function statusColor()
 {
     global $row;
-    if ($row['status'] == 'Shipped')
-    {
-        echo "shipped";
-    }
-    elseif ($row['status'] == 'Delivered')
-    {
+    if ($row['status'] == 'Stocked') {
+        echo "stocked";
+    } elseif ($row['status'] == 'Delivered') {
         echo "delivered";
-    }
-    elseif ($row['status'] == 'Returned')
-    {
+    } elseif ($row['status'] == 'Returned') {
         echo "returned";
-    }
-    else
-    {
+    } else {
         echo "default_status";
     }
 }
@@ -82,8 +71,7 @@ include 'includes/header.php';
             <!-- Main content -->
             <section class="content">
                 <?php
-                if (isset($_SESSION['error']))
-                {
+                if (isset($_SESSION['error'])) {
                     echo "
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -93,8 +81,7 @@ include 'includes/header.php';
           ";
                     unset($_SESSION['error']);
                 }
-                if (isset($_SESSION['success']))
-                {
+                if (isset($_SESSION['success'])) {
                     echo "
             <div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>

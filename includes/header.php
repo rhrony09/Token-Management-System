@@ -105,7 +105,7 @@
       padding: 0 5px;
     }
 
-    .shipped {
+    .stocked {
       background-color: #f39c12;
       color: #fff;
       padding: 0 5px;
