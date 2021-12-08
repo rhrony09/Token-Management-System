@@ -26,6 +26,10 @@
   .token-list {
     font-size: 14px !important;
   }
+  .token-list td,
+  .token-list th {
+    padding: 5px !important;
+  }
 }
 
 @page {
