@@ -24,7 +24,7 @@
     padding: 0 !important;
   }
   .token-list {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
 }
 
@@ -46,7 +46,7 @@
 .token-list td,
 .token-list th {
   text-align: center;
-  padding: 6px 8px;
+  padding: 6px;
   border: 1px solid #f2f2f2;
 }
 
