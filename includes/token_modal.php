@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <div class="col-md-4">
                             <label for="length" class="control-label">Length</label>
-                            <input type="text" class="form-control" id="length" name="length" placeholder="Enter Value in Inches">
+                            <input type="text" class="form-control" id="length" name="length" placeholder="Enter Value in Inches" required>
                         </div>
                         <div class="col-md-4">
                             <label for="body" class="control-label">Body</label>

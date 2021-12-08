@@ -139,5 +139,25 @@
       margin: 30px auto;
       position: relative;
     }
+
+    .swal2-popup {
+      font-size: 16px !important;
+    }
+
+    .d-flex {
+      display: flex;
+    }
+
+    .align-items-center {
+      align-items: center;
+    }
+
+    .token-search .col-xs-1,
+    .token-search .col-xs-3,
+    .token-search .col-xs-4,
+    .token-search .col-xs-5 {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   </style>
 </head>

@@ -42,18 +42,20 @@
 <script src="./library/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="./library/dist/js/demo.js"></script>
+<!-- SweetAlart -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   $(function() {
     $('#example1').DataTable({
       'responsive': true,
       'order': [
-        [0, "desc"]
+        [1, "desc"]
       ],
       'scrollX': true,
       'lengthMenu': [
-        [25, 50, 100, -1],
-        [25, 50, 100, "All"]
+        [16, 32, 48, -1],
+        [16, 32, 48, "All"]
       ]
     })
     $('#example2').DataTable({

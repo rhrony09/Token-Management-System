@@ -1,7 +1,15 @@
 <?php
 include 'includes/session.php';
 include 'includes/header.php';
-$sql = "SELECT * FROM token WHERE print_status = 0 ORDER BY id DESC";
+include './library/timezone.php';
+$today = date('Y-m-d');
+$year = date('Y');
+$mydate = getdate(date("U"));
+if (isset($_GET['year'])) {
+    $year = $_GET['year'];
+}
+
+$sql = "SELECT * FROM token WHERE created_on = '$today' ORDER BY id desc";
 $query = $conn->query($sql);
 ?>
 
@@ -17,10 +25,10 @@ $query = $conn->query($sql);
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Not Printed Tokens (<?= $query->num_rows ?>)</h1>
+                <h1>Total Today (<?= $query->num_rows ?>)</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Not Printed Tokens</li>
+                    <li class="active">Total Today</li>
                 </ol>
             </section>
 
@@ -78,6 +86,23 @@ $query = $conn->query($sql);
                                     </thead>
                                     <tbody>
                                         <?php
+                                        function echoStatus()
+                                        {
+                                            global $row;
+                                            if ($row['status'] == 'Returned') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['return_date'] . "</span>";
+                                                return $status;
+                                            } elseif ($row['status'] == 'Delivered') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['delivery_date'] . "</span>";
+                                                return $status;
+                                            } elseif ($row['status'] == 'Stocked') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['stock_date'] . "</span>";
+                                                return $status;
+                                            } else {
+                                                $status = $row['status'];
+                                                return $status;
+                                            }
+                                        }
                                         while ($row = $query->fetch_assoc()) {
                                         ?>
                                             <tr>
@@ -96,7 +121,7 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['embroidery']; ?></td>
                                                 <td><?php echo $row['swing']; ?></td>
                                                 <td><?php echo $row['note']; ?></td>
-                                                <td><?php echo $row['status']; ?></td>
+                                                <td><?php echo echoStatus(); ?></td>
                                             </tr>
                                         <?php
                                         }
@@ -104,7 +129,7 @@ $query = $conn->query($sql);
                                     </tbody>
                                 </table>
                                 <div class="col-xs-12 text-center not-print" style="padding: 30px 0 20px 0">
-                                    <a href="token_print.php?print=all" class="btn btn-primary btn-md"><i class="fa fa-print"></i> Print All</a>
+                                    <button class="btn btn-primary btn-md" onclick="window.print()">Print All</button>
                                 </div>
                             </div>
                         </div>
@@ -115,13 +140,13 @@ $query = $conn->query($sql);
             <!-- right col -->
         </div>
         <?php include 'includes/footer.php'; ?>
-        <?php include 'includes/token_modal.php'; ?>
 
     </div>
     <!-- ./wrapper -->
 
 
     <?php include 'includes/scripts.php'; ?>
+    <?php include 'includes/token_modal.php'; ?>
 
 </body>
 

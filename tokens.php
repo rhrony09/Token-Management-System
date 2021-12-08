@@ -53,13 +53,40 @@ $query = $conn->query($sql);
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <div class="box-header with-border not-print">
-                                <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                            <div class="box-header with-border not-print d-flex align-items-center">
+                                <div class="col-xs-4">
+                                    <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> New</a>
+                                </div>
+                                <div class="col-xs-8 token-search">
+                                    <form class="form-horizontal" method="POST" action="tokens_search.php" enctype="multipart/form-data">
+                                        <div class="col-xs-3">
+                                            <select class="form-control" name="search_for">
+                                                <option value="" selected>- Select -</option>
+                                                <option value="token_no">Token No</option>
+                                                <option value="product_code">Product Code</option>
+                                                <option value="length">Length</option>
+                                                <option value="cutting">Cutting Master</option>
+                                                <option value="embroidery">Embroidery Master</option>
+                                                <option value="swing">Swing Master</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" name="query" placeholder="Search Query">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input type="text" autocomplete="off" id="datepicker_add" class="form-control" name="date" placeholder="Date">
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button type="submit" class="btn btn-primary btn-flat" name="search"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <div class="box-body">
                                 <table id="example1" class="token-list">
                                     <thead>
                                         <tr>
+                                            <th class="not-print">Action</th>
                                             <th>Token</th>
                                             <th>Date</th>
                                             <th>Invoice</th>
@@ -73,19 +100,10 @@ $query = $conn->query($sql);
                                             <th>Swing</th>
                                             <th>Note</th>
                                             <th>Status</th>
-                                            <th class="not-print">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        function disableDeleteButton()
-                                        {
-                                            global $row;
-                                            if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
-                                                return 'disabled';
-                                            }
-                                        }
-
                                         function echoStatus()
                                         {
                                             global $row;
@@ -106,6 +124,9 @@ $query = $conn->query($sql);
                                         while ($row = $query->fetch_assoc()) {
                                         ?>
                                             <tr>
+                                                <td class="not-print">
+                                                    <a href='<?php echo "token_view.php?view=token&id=" . $row['id']; ?>' class="btn btn-primary btn-sm btn-flat"><i class="fa fa-eye"></i> View</a>
+                                                </td>
                                                 <td><?php echo $row['token_no']; ?></td>
                                                 <td><?php echo $row['order_date']; ?></td>
                                                 <td><?php echo $row['invoice_no']; ?></td>
@@ -119,19 +140,15 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['swing']; ?></td>
                                                 <td><?php echo $row['note']; ?></td>
                                                 <td><?php echo echoStatus(); ?></td>
-                                                <td class="not-print">
-                                                    <a href='<?php echo "token_view.php?view=token&id=" . $row['id']; ?>' class="btn btn-primary btn-sm btn-flat"><i class="fa fa-eye"></i> View</a>
-                                                    <?php if ($user['role'] == 1 && disableDeleteButton() != 'disabled') : ?>
-                                                        <a href='<?php echo "token_delete.php?delete=token&id=" . $row['id']; ?>' class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Delete</a>
-                                                    <? endif ?>
-                                                </td>
-
                                             </tr>
                                         <?php
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+                                <div class="col-xs-12 text-center not-print" style="padding: 30px 0 20px 0">
+                                    <button class="btn btn-primary btn-md" onclick="window.print()">Print All</button>
+                                </div>
                             </div>
                         </div>
                     </div>

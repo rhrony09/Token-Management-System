@@ -20,10 +20,28 @@ function echo_status()
 {
     global $row;
     if ($row['status'] != "") {
-        echo $row['status'];
+        return $row['status'];
     } else {
-        echo "N/A";
+        return "N/A";
     }
+}
+
+function echo_print_status()
+{
+    global $row;
+    if ($row['print_status'] == 0) {
+        return 'Not Printed';
+    } elseif ($row['print_status'] == 1) {
+        return 'Printed';
+    } else {
+        return 'N/A';
+    }
+}
+
+function echo_date($x)
+{
+    $date = date_create($x);
+    return date_format($date, "d M, Y");
 }
 
 function disableDeleteButton()
@@ -163,27 +181,30 @@ function statusColor()
                                 <div class="col-xs-12">
                                     Note: <?= $row['note'] ?>
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-xs-4">
                                     Status: <span class="<?= statusColor() ?>"><?= echo_status() ?></span>
                                 </div>
+                                <div class="col-xs-8">
+                                    Print Status: <?= echo_print_status() ?>
+                                </div>
                                 <div class="col-xs-4">
-                                    Stock Date: <?= $row['stock_date'] ?>
+                                    Stock Date: <?= echo_date($row['stock_date']) ?>
                                 </div>
                                 <div class="col-xs-3">
-                                    Delivery Date: <?= $row['delivery_date'] ?>
+                                    Delivery Date: <?= echo_date($row['delivery_date']) ?>
                                 </div>
                                 <div class="col-xs-5">
-                                    Return Date: <?= $row['return_date'] ?>
+                                    Return Date: <?= echo_date($row['return_date']) ?>
                                 </div>
                                 <div style="padding-top: 30px;" class="col-xs-12">
                                     <h3>Actions</h3>
                                     <hr>
                                     <a href='<?php echo "token_update.php?update=token&id=" . $id; ?>' class="btn btn-info <?= disableUpdateButton() ?>">Update</a>
-                                    <a href='<?php echo "token_stocked.php?update=token&id=" . $id; ?>' class="btn btn-warning <?= disableStockedButton() ?>">Stocked</a>
-                                    <a href='<?php echo "token_delivered.php?update=token&id=" . $id; ?>' class="btn btn-success <?= disableDeliveredButton() ?>">Delivered</a>
-                                    <a href='<?php echo "token_returned.php?update=token&id=" . $id; ?>' class="btn btn-primary <?= disableReturnedButton() ?>">Returned</a>
+                                    <button class="stock-btn btn btn-warning" data-id="<?= $id ?>" <?= disableStockedButton() ?>>Stocked</button>
+                                    <button class="deliver-btn btn btn-success" data-id="<?= $id ?>" <?= disableDeliveredButton() ?>>Delivered</button>
+                                    <button class="return-btn btn btn-primary" data-id="<?= $id ?>" <?= disableReturnedButton() ?>>Returned</button>
                                     <?php if ($user['role'] == 1 && disableDeleteButton() != "disabled") : ?>
-                                        <a href='<?php echo "token_delete.php?delete=token&id=" . $id; ?>' class="btn btn-danger">Delete</a>
+                                        <button class="delete-btn btn btn-danger" data-id="<?= $id ?>">Delete</button>
                                     <? endif ?>
                                 </div>
                             </div>
@@ -201,6 +222,92 @@ function statusColor()
 
 
     <?php include 'includes/scripts.php'; ?>
+    <script>
+        $(".stock-btn").click(function() {
+            var dataId = $(this).attr("data-id");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Status will be changed to Stocked!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Updated!',
+                        'Status has been Updated.',
+                        'success',
+                        window.location.href = "token_stocked.php?update=token&id=" + dataId
+                    )
+                }
+            })
+        });
+        $(".deliver-btn").click(function() {
+            var dataId = $(this).attr("data-id");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Status will be changed to Delivered!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Updated!',
+                        'Status has been Updated.',
+                        'success',
+                        window.location.href = "token_delivered.php?update=token&id=" + dataId
+                    )
+                }
+            })
+        });
+        $(".return-btn").click(function() {
+            var dataId = $(this).attr("data-id");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Status will be changed to Returned!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Updated!',
+                        'Status has been Updated.',
+                        'success',
+                        window.location.href = "token_returned.php?update=token&id=" + dataId
+                    )
+                }
+            })
+        });
+        $(".delete-btn").click(function() {
+            var dataId = $(this).attr("data-id");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This token will be deleted!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Token has been Deleted.',
+                        'success',
+                        window.location.href = "token_delete.php?delete=token&id=" + dataId
+                    )
+                }
+            })
+        });
+    </script>
 
 </body>
 

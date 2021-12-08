@@ -23,6 +23,23 @@
 
       <li class="treeview">
         <a href="#">
+          <i class="fa fa-question-circle "></i>
+          <span>Status</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="tokens_view_month.php"><i class="fa fa-circle-o"></i> Total This Month</a></li>
+          <li><a href="tokens_view_today.php"><i class="fa fa-circle-o"></i> Total Today</a></li>
+          <li><a href="tokens_view_stocked.php"><i class="fa fa-circle-o"></i> Total Stock</a></li>
+          <li><a href="tokens_view_returned.php"><i class="fa fa-circle-o"></i> Total Returned</a></li>
+          <li><a href="tokens_view_delivered.php"><i class="fa fa-circle-o"></i> Total Delivered</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
           <i class="fa fa-users"></i>
           <span>Factory Employees</span>
           <span class="pull-right-container">

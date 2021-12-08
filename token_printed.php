@@ -60,6 +60,7 @@ $query = $conn->query($sql);
                                 <table id="example1" class="token-list">
                                     <thead>
                                         <tr>
+                                            <th class="not-print">Action</th>
                                             <th>Token</th>
                                             <th>Date</th>
                                             <th>Invoice</th>
@@ -73,18 +74,10 @@ $query = $conn->query($sql);
                                             <th>Swing</th>
                                             <th>Note</th>
                                             <th>Status</th>
-                                            <th class="not-print">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        function disableDeleteButton()
-                                        {
-                                            global $row;
-                                            if ($row['status'] == 'Stocked' || $row['status'] == 'Returned' || $row['status'] == 'Delivered') {
-                                                return 'disabled';
-                                            }
-                                        }
                                         function echoStatus()
                                         {
                                             global $row;
@@ -105,6 +98,9 @@ $query = $conn->query($sql);
                                         while ($row = $query->fetch_assoc()) {
                                         ?>
                                             <tr>
+                                                <td class="not-print">
+                                                    <a href='<?php echo "token_view.php?view=token&id=" . $row['id']; ?>' class="btn btn-primary btn-sm btn-flat"><i class="fa fa-eye"></i> View</a>
+                                                </td>
                                                 <td><?php echo $row['token_no']; ?></td>
                                                 <td><?php echo $row['order_date']; ?></td>
                                                 <td><?php echo $row['invoice_no']; ?></td>
@@ -118,19 +114,15 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['swing']; ?></td>
                                                 <td><?php echo $row['note']; ?></td>
                                                 <td><?php echo echoStatus(); ?></td>
-                                                <td class="not-print">
-                                                    <a href='<?php echo "token_view.php?view=token&id=" . $row['id']; ?>' class="btn btn-primary btn-sm btn-flat"><i class="fa fa-eye"></i> View</a>
-                                                    <?php if ($user['role'] == 1 && disableDeleteButton() != 'disabled') : ?>
-                                                        <a href='<?php echo "token_delete.php?delete=token&id=" . $row['id']; ?>' class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Delete</a>
-                                                    <? endif ?>
-                                                </td>
-
                                             </tr>
                                         <?php
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+                                <div class="col-xs-12 text-center not-print" style="padding: 30px 0 20px 0">
+                                    <button class="btn btn-primary btn-md" onclick="window.print()">Print All</button>
+                                </div>
                             </div>
                         </div>
                     </div>

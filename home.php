@@ -90,9 +90,9 @@ if (isset($_GET['year'])) {
                 <p>Token Created This Month</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="ion ion-calendar"></i>
               </div>
-              <a href="tokens.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="tokens_view_month.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -112,7 +112,27 @@ if (isset($_GET['year'])) {
               <div class="icon">
                 <i class="ion ion-clock"></i>
               </div>
-              <a href="tokens.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="tokens_view_today.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-teal">
+              <div class="inner">
+                <?php
+                $sql = "SELECT * FROM token WHERE print_status = 0";
+                $stocked = $conn->query($sql);
+
+                echo "<h3>" . $stocked->num_rows . "</h3>"
+                ?>
+
+                <p>Token Not Printed</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-printer"></i>
+              </div>
+              <a href="token_not_printed.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -121,18 +141,10 @@ if (isset($_GET['year'])) {
             <div class="small-box bg-maroon">
               <div class="inner">
                 <?php
-                $sql_cutting = "SELECT * FROM cutting_master";
-                $cutting_count = $conn->query($sql_cutting);
+                $sql = "SELECT * FROM cutting_master UNION SELECT * FROM embroidery_master UNION SELECT * FROM swing_master";
+                $total_employee = $conn->query($sql);
 
-                $sql_embroidery = "SELECT * FROM embroidery_master";
-                $embroidery_count = $conn->query($sql_embroidery);
-
-                $sql_swing = "SELECT * FROM swing_master";
-                $swing_count = $conn->query($sql_swing);
-
-                $total_employee = $cutting_count->num_rows + $embroidery_count->num_rows + $swing_count->num_rows;
-
-                echo "<h3>" . $total_employee . "</h3>"
+                echo "<h3>" . $total_employee->num_rows . "</h3>"
                 ?>
 
                 <p>Total Factory Employee</p>
@@ -144,6 +156,65 @@ if (isset($_GET['year'])) {
             </div>
           </div>
           <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <?php
+                $sql = "SELECT * FROM token WHERE status = 'Stocked' UNION SELECT * FROM token WHERE status = 'Returned'";
+                $stocked = $conn->query($sql);
+
+                echo "<h3>" . $stocked->num_rows . "</h3>"
+                ?>
+
+                <p>Total Stock</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-cube"></i>
+              </div>
+              <a href="tokens_view_stocked.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+              <div class="inner">
+                <?php
+                $sql = "SELECT * FROM token WHERE status = 'Returned'";
+                $returned = $conn->query($sql);
+
+                echo "<h3>" . $returned->num_rows . "</h3>"
+                ?>
+
+                <p>Total Returned</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-refresh"></i>
+              </div>
+              <a href="tokens_view_returned.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-olive">
+              <div class="inner">
+                <?php
+                $sql = "SELECT * FROM token WHERE status = 'Delivered'";
+                $delivered = $conn->query($sql);
+
+                echo "<h3>" . $delivered->num_rows . "</h3>"
+                ?>
+
+                <p>Total Delivered</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-checkmark-circled"></i>
+              </div>
+              <a href="tokens_view_delivered.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
         </div>
         <!-- /.row -->
         <div class="row">

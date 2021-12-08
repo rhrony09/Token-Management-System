@@ -1,7 +1,27 @@
 <?php
+
+if (!isset($_POST['search'])) {
+    header('location: tokens.php');
+}
+
 include 'includes/session.php';
 include 'includes/header.php';
-$sql = "SELECT * FROM token WHERE print_status = 0 ORDER BY id DESC";
+
+$search_for = $_POST['search_for'];
+$query = $_POST['query'];
+$date = $_POST['date'];
+
+if (empty($search_for) && empty($query) && !empty($date)) {
+    $sql = "SELECT * FROM token WHERE order_date = '$date' ORDER BY id desc";;
+} elseif (!empty($search_for) && !empty($query) && empty($date)) {
+    $sql = "SELECT * FROM token WHERE $search_for = '$query' ORDER BY id desc";
+} elseif (!empty($search_for) && !empty($query) && !empty($date)) {
+    $sql = "SELECT * FROM token WHERE $search_for = '$query' AND order_date = '$date' ORDER BY id desc";
+} else {
+    $_SESSION['error'] = 'Please fill up the form properly';
+    $sql = "SELECT * FROM token WHERE id = 0";
+}
+
 $query = $conn->query($sql);
 ?>
 
@@ -17,10 +37,10 @@ $query = $conn->query($sql);
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Not Printed Tokens (<?= $query->num_rows ?>)</h1>
+                <h1>Search Tokens (<?= $query->num_rows ?>)</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Not Printed Tokens</li>
+                    <li class="active">Search Tokens</li>
                 </ol>
             </section>
 
@@ -53,8 +73,34 @@ $query = $conn->query($sql);
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <div class="box-header with-border not-print">
-                                <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                            <div class="box-header with-border not-print d-flex align-items-center">
+                                <div class="col-xs-4">
+                                    <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> New</a>
+                                </div>
+                                <div class="col-xs-8 token-search">
+                                    <form class="form-horizontal" method="POST" action="tokens_search.php" enctype="multipart/form-data">
+                                        <div class="col-xs-3">
+                                            <select class="form-control" name="search_for">
+                                                <option value="" selected>- Select -</option>
+                                                <option value="token_no">Token No</option>
+                                                <option value="product_code">Product Code</option>
+                                                <option value="length">Length</option>
+                                                <option value="cutting">Cutting Master</option>
+                                                <option value="embroidery">Embroidery Master</option>
+                                                <option value="swing">Swing Master</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" name="query" placeholder="Search Query">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input type="text" autocomplete="off" id="datepicker_add" class="form-control" name="date" placeholder="Date">
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button type="submit" class="btn btn-primary btn-flat" name="search"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <div class="box-body">
                                 <table id="example1" class="token-list">
@@ -78,6 +124,23 @@ $query = $conn->query($sql);
                                     </thead>
                                     <tbody>
                                         <?php
+                                        function echoStatus()
+                                        {
+                                            global $row;
+                                            if ($row['status'] == 'Returned') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['return_date'] . "</span>";
+                                                return $status;
+                                            } elseif ($row['status'] == 'Delivered') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['delivery_date'] . "</span>";
+                                                return $status;
+                                            } elseif ($row['status'] == 'Stocked') {
+                                                $status = $row['status'] . "<span class='status-date'>" . $row['stock_date'] . "</span>";
+                                                return $status;
+                                            } else {
+                                                $status = $row['status'];
+                                                return $status;
+                                            }
+                                        }
                                         while ($row = $query->fetch_assoc()) {
                                         ?>
                                             <tr>
@@ -96,7 +159,7 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['embroidery']; ?></td>
                                                 <td><?php echo $row['swing']; ?></td>
                                                 <td><?php echo $row['note']; ?></td>
-                                                <td><?php echo $row['status']; ?></td>
+                                                <td><?php echo echoStatus(); ?></td>
                                             </tr>
                                         <?php
                                         }
@@ -104,7 +167,7 @@ $query = $conn->query($sql);
                                     </tbody>
                                 </table>
                                 <div class="col-xs-12 text-center not-print" style="padding: 30px 0 20px 0">
-                                    <a href="token_print.php?print=all" class="btn btn-primary btn-md"><i class="fa fa-print"></i> Print All</a>
+                                    <button class="btn btn-primary btn-md" onclick="window.print()">Print All</button>
                                 </div>
                             </div>
                         </div>
@@ -115,13 +178,13 @@ $query = $conn->query($sql);
             <!-- right col -->
         </div>
         <?php include 'includes/footer.php'; ?>
-        <?php include 'includes/token_modal.php'; ?>
 
     </div>
     <!-- ./wrapper -->
 
 
     <?php include 'includes/scripts.php'; ?>
+    <?php include 'includes/token_modal.php'; ?>
 
 </body>
 
