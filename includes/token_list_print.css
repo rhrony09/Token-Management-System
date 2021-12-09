@@ -6,8 +6,8 @@
   }
   html,
   body {
-    width: 297mm;
-    height: 210mm;
+    width: 14in !important;
+    height: 8.5in !important;
   }
   .box {
     border: 0 !important;
@@ -24,7 +24,7 @@
     padding: 0 !important;
   }
   .token-list {
-    font-size: 14px !important;
+    font-size: 15px !important;
   }
   .token-list td,
   .token-list th {
@@ -33,7 +33,7 @@
 }
 
 @page {
-  size: A4 landscape;
+  size: legal landscape;
   margin-left: 0px;
   margin-right: 0px;
   margin-top: 0px;

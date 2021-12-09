@@ -72,8 +72,8 @@ $query = $conn->query($sql);
                                             <th>Cutting</th>
                                             <th>Embroidery</th>
                                             <th>Swing</th>
-                                            <th>Note</th>
                                             <th>Status</th>
+                                            <th>Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -112,8 +112,8 @@ $query = $conn->query($sql);
                                                 <td><?php echo $row['cutting']; ?></td>
                                                 <td><?php echo $row['embroidery']; ?></td>
                                                 <td><?php echo $row['swing']; ?></td>
-                                                <td><?php echo $row['note']; ?></td>
                                                 <td><?php echo echoStatus(); ?></td>
+                                                <td><?php echo $row['note']; ?></td>
                                             </tr>
                                         <?php
                                         }
