@@ -48,7 +48,7 @@
 <script>
   $(function() {
     $('#example1').DataTable({
-      'responsive': false,
+      'responsive': true,
       'order': [
         [1, "desc"]
       ],
@@ -59,6 +59,7 @@
       ],
       'searching': false,
       'ordering': false,
+      'lengthChange': false,
     });
     $('#example2').DataTable({
       'responsive': false,

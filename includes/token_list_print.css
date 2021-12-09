@@ -33,7 +33,7 @@
 }
 
 @page {
-  size: Legal landscape;
+  size: legal landscape;
   margin-left: 0px;
   margin-right: 0px;
   margin-top: 0px;
@@ -41,6 +41,7 @@
 }
 
 .token-list {
+  min-width: 297mm !important;
   border-collapse: collapse;
   border-spacing: 0;
   border: 1px solid #c6c6c6;
