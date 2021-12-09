@@ -49,17 +49,14 @@
   $(function() {
     $('#example1').DataTable({
       'responsive': true,
-      'order': [
-        [1, "desc"]
-      ],
       'scrollX': true,
       'lengthMenu': [
         [16, 32, 48, -1],
         [16, 32, 48, "All"]
       ],
-      'searching': false,
+      'searching': true,
       'ordering': false,
-      'lengthChange': false,
+      'lengthChange': true,
     });
     $('#example2').DataTable({
       'responsive': false,

@@ -70,7 +70,7 @@ function disableStockedButton()
 function disableDeliveredButton()
 {
     global $row;
-    if ($row['status'] == 'Delivered' || $row['status'] == 'Returned' || $row['print_status'] == 0) {
+    if ($row['status'] == 'Delivered' || $row['print_status'] == 0) {
         return 'disabled';
     }
 }

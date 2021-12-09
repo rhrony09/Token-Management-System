@@ -4,11 +4,11 @@
     -moz-print-color-adjust: exact !important;
     -ms-print-color-adjust: exact !important;
   }
-  /* html,
+  html,
   body {
     width: 297mm;
     height: 210mm;
-  } */
+  }
   .box {
     border: 0 !important;
   }
@@ -24,16 +24,16 @@
     padding: 0 !important;
   }
   .token-list {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
   .token-list td,
   .token-list th {
-    padding: 5px 8px !important;
+    padding: 4px 8px !important;
   }
 }
 
 @page {
-  size: legal landscape;
+  size: A4 landscape;
   margin-left: 0px;
   margin-right: 0px;
   margin-top: 0px;
@@ -41,7 +41,7 @@
 }
 
 .token-list {
-  min-width: 297mm !important;
+  min-width: 285mm;
   border-collapse: collapse;
   border-spacing: 0;
   border: 1px solid #c6c6c6;
