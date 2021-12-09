@@ -57,6 +57,10 @@
       'searching': true,
       'ordering': false,
       'lengthChange': true,
+      'columnDefs': [{
+        'width': '150px',
+        'targets': 12
+      }]
     });
     $('#example2').DataTable({
       'responsive': false,
