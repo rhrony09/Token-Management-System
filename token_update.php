@@ -154,10 +154,6 @@ include 'includes/header.php';
                                         <div class="col-xs-1">Note:</div>
                                         <div class="col-xs-6"><input type="text" class="form-control" id="note" name="note" value="<?= $row['note'] ?>"></div>
                                     </div>
-                                    <div class="col-xs-12">
-                                        <div class="col-xs-1">Status:</div>
-                                        <div class="col-xs-6"><input type="text" class="form-control" id="status" name="status" value="<?= $row['status'] ?>"></div>
-                                    </div>
                                     <div style="margin-top: 50px;" class="col-xs-12">
                                         <button type="submit" class="btn btn-info" name="update">Update</button>
                                     </div>

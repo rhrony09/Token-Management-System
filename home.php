@@ -141,15 +141,10 @@ if (isset($_GET['year'])) {
             <div class="small-box bg-maroon">
               <div class="inner">
                 <?php
-                $all_sql = "SELECT * FROM token";
-                $all_qu = $conn->query($all_sql);
-                $total_stock = "SELECT * FROM token WHERE status = 'Stocked' UNION SELECT * FROM token WHERE status = 'Returned'";
-                $stock_qu = $conn->query($total_stock);
-                $total_delivery = "SELECT * FROM token WHERE status = 'Delivered'";
-                $delivery_qu = $conn->query($total_delivery);
-                $incomplete_stock = $all_qu->num_rows - $stock_qu->num_rows + $delivery_qu->num_rows;
+                $sql = "SELECT * FROM token WHERE status = '' UNION SELECT * FROM token WHERE status IS NULL";
+                $incomplete_stock = $conn->query($sql);
 
-                echo "<h3>" . $incomplete_stock . "</h3>"
+                echo "<h3>" . $incomplete_stock->num_rows . "</h3>"
                 ?>
 
                 <p>Incomplete Stock</p>
@@ -157,7 +152,7 @@ if (isset($_GET['year'])) {
               <div class="icon">
                 <i class="ion ion-load-a"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="tokens_view_incomplete_stock.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

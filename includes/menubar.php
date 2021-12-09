@@ -35,6 +35,7 @@
           <li><a href="tokens_view_stocked.php"><i class="fa fa-circle-o"></i> Total Stock</a></li>
           <li><a href="tokens_view_returned.php"><i class="fa fa-circle-o"></i> Total Returned</a></li>
           <li><a href="tokens_view_delivered.php"><i class="fa fa-circle-o"></i> Total Delivered</a></li>
+          <li><a href="tokens_view_incomplete_stock.php"><i class="fa fa-circle-o"></i> Incomplete Stock</a></li>
         </ul>
       </li>
 
