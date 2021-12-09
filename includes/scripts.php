@@ -48,7 +48,20 @@
 <script>
   $(function() {
     $('#example1').DataTable({
-      'responsive': true,
+      'responsive': false,
+      'order': [
+        [1, "desc"]
+      ],
+      'scrollX': true,
+      'lengthMenu': [
+        [16, 32, 48, -1],
+        [16, 32, 48, "All"]
+      ],
+      'searching': false,
+      'ordering': false,
+    });
+    $('#example2').DataTable({
+      'responsive': false,
       'order': [
         [1, "desc"]
       ],
@@ -57,15 +70,15 @@
         [16, 32, 48, -1],
         [16, 32, 48, "All"]
       ]
-    })
-    $('#example2').DataTable({
+    });
+    $('#example3').DataTable({
       'paging': true,
       'lengthChange': false,
       'searching': false,
       'ordering': true,
       'info': true,
       'autoWidth': false
-    })
+    });
   })
 </script>
 <script>

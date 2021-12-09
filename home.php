@@ -141,18 +141,23 @@ if (isset($_GET['year'])) {
             <div class="small-box bg-maroon">
               <div class="inner">
                 <?php
-                $sql = "SELECT * FROM cutting_master UNION SELECT * FROM embroidery_master UNION SELECT * FROM swing_master";
-                $total_employee = $conn->query($sql);
+                $all_sql = "SELECT * FROM token";
+                $all_qu = $conn->query($all_sql);
+                $total_stock = "SELECT * FROM token WHERE status = 'Stocked' UNION SELECT * FROM token WHERE status = 'Returned'";
+                $stock_qu = $conn->query($total_stock);
+                $total_delivery = "SELECT * FROM token WHERE status = 'Delivered'";
+                $delivery_qu = $conn->query($total_delivery);
+                $incomplete_stock = $all_qu->num_rows - $stock_qu->num_rows + $delivery_qu->num_rows;
 
-                echo "<h3>" . $total_employee->num_rows . "</h3>"
+                echo "<h3>" . $incomplete_stock . "</h3>"
                 ?>
 
-                <p>Total Factory Employee</p>
+                <p>Incomplete Stock</p>
               </div>
               <div class="icon">
-                <i class="ion ion-ios-people"></i>
+                <i class="ion ion-load-a"></i>
               </div>
-              <a href="cutting_master.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
